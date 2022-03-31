@@ -101,12 +101,13 @@ describe('CRUD Update : PUT /update', () => {
         newpassword: "bridges"
       }).expect("Content-Type", /json/);
     });  
-    test('If we do not send a newpassword value statusresponse must be 400 ', async () => {
+    test('If we send a newpassword value update field must be defined ', async () => {
       const response = await request.put("/users/update").send({
         username: "lebowski@domini.es",
-        password: "abide"
+        password: "abide",
+        newpassword: "bridges"
       });
-      expect(response.statusCode).toBe(400);
+      expect(response.body.update).toBeDefined();
     });
   });
 });
